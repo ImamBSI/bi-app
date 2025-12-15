@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FilterBar from "@/components/filter-bar";
 import { ForecastChart } from "@/pages/forecast/components/forecast-chart";
@@ -8,22 +8,33 @@ import { StatsSummary } from "@/pages/forecast/components/stats-summary";
 import { ForecastTable } from "@/pages/forecast/components/forecast-table";
 import { CompareTable } from "@/pages/forecast/components/compare-table";
 import { DeviationsCard } from "@/pages/forecast/components/deviation-card";
-
 import { useForecast } from "@/hooks/forecastData";
 import { useActualData } from "@/hooks/actualData";
 import { useEvaluation } from "@/hooks/modelEvaluation";
 
 export function ForecastPage() {
+  const { availableYears } = useActualData("indexEnergy", "2025");
+
+  // Set initial year ke tahun tertinggi yang tersedia, atau current year
+  const getInitialYear = () => {
+    if (availableYears && availableYears.length > 0) {
+      return availableYears[availableYears.length - 1]; // Ambil tahun terakhir
+    }
+    return String(new Date().getFullYear());
+  };
+
+  const initialYear = useMemo(() => getInitialYear(), [availableYears]);
+
   const [model, setModel] = useState("prophet");
   const [category, setCategory] = useState("indexEnergy");
-  const [year, setYear] = useState("2026");
+  const [year, setYear] = useState(initialYear);
 
   const [pendingModel, setPendingModel] = useState("prophet");
   const [pendingCategory, setPendingCategory] = useState("indexEnergy");
-  const [pendingYear, setPendingYear] = useState("2026");
+  const [pendingYear, setPendingYear] = useState(initialYear);
 
   const { forecastData, warning } = useForecast(model, category, year);
-  const { actualData, availableYears } = useActualData(category, year);
+  const { actualData: currentActualData } = useActualData(category, year);
   const { evaluation } = useEvaluation(model, category);
 
   const getStats = (arr: number[]) => {
@@ -40,7 +51,7 @@ export function ForecastPage() {
     };
   };
 
-  const actualStats = getStats(actualData.map((d) => d.value));
+  const actualStats = getStats(currentActualData.map((d) => d.value));
   const forecastStats = getStats(forecastData.map((d) => d.forecastValue ?? 0));
 
   const diffPercent =
@@ -101,7 +112,7 @@ export function ForecastPage() {
           <div className="bg-white rounded-lg">
             <ForecastChart
               forecastData={forecastData}
-              actualData={actualData}
+              actualData={currentActualData}
             />
           </div>
         </div>
@@ -116,7 +127,7 @@ export function ForecastPage() {
           />
           <DeviationsCard
             forecastData={forecastData}
-            actualData={actualData}
+            actualData={currentActualData}
             topN={3}
           />
         </div>
@@ -124,7 +135,10 @@ export function ForecastPage() {
         {/* Tables */}
         <div className="flex flex-wrap gap-4 w-full mt-2">
           <ForecastTable forecastData={forecastData} />
-          <CompareTable forecastData={forecastData} actualData={actualData} />
+          <CompareTable
+            forecastData={forecastData}
+            actualData={currentActualData}
+          />
         </div>
       </div>
     </div>

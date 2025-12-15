@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { formatNumberID } from "@/lib/format";
 
 interface DeviationsCardProps {
   forecastData: { date: string; forecastValue: number | null }[];
@@ -47,7 +48,7 @@ export function DeviationsCard({
                 <li key={i} className="space-y-1 mb-2">
                   <span className="font-medium block">{d.date}</span>
                   <span className="text-left block">
-                    Forecast {d.forecast.toFixed(2)} vs Actual {d.actual.toFixed(2)}
+                    Forecast {formatNumberID(d.forecast)} vs Actual {formatNumberID(d.actual)}
                   </span>
                 </li>
               ))}

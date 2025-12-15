@@ -16,7 +16,7 @@ export function useActualData(category: string, year: string) {
         const resAll = await fetch(`http://127.0.0.1:5000/bi-apps/api/clean_data`);
         const dataAll = await resAll.json();
 
-        console.log("[actualData] Fetched all data:", dataAll);
+        // console.log("[actualData] Fetched all data:", dataAll);
 
         // Parse available years from all data
         let allYears: string[] = [];
@@ -30,7 +30,7 @@ export function useActualData(category: string, year: string) {
           allYears = [...new Set(allDataArray.map((item: any) => String(item.year)))].sort() as string[];
         }
         
-        console.log("[actualData] Available years:", allYears);
+        // console.log("[actualData] Available years:", allYears); 
         setAvailableYears(allYears);
 
         let url = `http://127.0.0.1:5000/bi-apps/api/clean_data`;
@@ -41,10 +41,10 @@ export function useActualData(category: string, year: string) {
           url += `?${params.toString()}`;
         }
 
-        console.log("[actualData] Fetching from:", url);
+        // console.log("[actualData] Fetching from:", url);
         const res = await fetch(url);
         const response = await res.json();
-        console.log("[actualData] Response:", response);
+        // console.log("[actualData] Response:", response);
 
         // Handle response format
         let data: any[] = [];
@@ -54,7 +54,7 @@ export function useActualData(category: string, year: string) {
           data = response;
         }
 
-        console.log("[actualData] Parsed data array:", data);
+        // console.log("[actualData] Parsed data array:", data);
 
         if (!Array.isArray(data) || data.length === 0) {
           console.warn("No data available:", data);
@@ -89,7 +89,7 @@ export function useActualData(category: string, year: string) {
             .filter((row) => row.value > 0);
         }
 
-        console.log("[actualData] Mapped data:", mapped);
+        // console.log("[actualData] Mapped data:", mapped);
         setActualData(mapped);
       } catch (err) {
         console.error("Error fetching actual data:", err);

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFutureInsight } from "@/hooks/insightEngine";
+import { formatNumberID } from "@/lib/format";
 
 export function KPIOutlook() {
   const { data, loading, error } = useFutureInsight();
@@ -33,18 +34,18 @@ export function KPIOutlook() {
         <div className="text-sm">Avg Forecast</div>
         <div className="text-center">
           <div className="text-5xl font-extrabold">
-            {kpi.avg_forecast.toFixed(2)}
+            {formatNumberID(kpi.avg_forecast)}
           </div>
         </div>
         <div className="flex justify-center items-center space-x-4 text-lg text-gray-700">
           <div className="flex items-center space-x-1">
             <span className="font-medium">Target</span>
-            <span className="font-bold">{kpi.target.toFixed(2)}</span>
+            <span className="font-bold">{formatNumberID(kpi.target)}</span>
           </div>
           <span className="font-bold">~</span>
           <div className="flex items-center space-x-1">
             <span className="font-medium">Gap</span>
-            <span className="font-bold">{kpi.gap.toFixed(2)}</span>
+            <span className="font-bold">{formatNumberID(kpi.gap)}</span>
           </div>
         </div>
         <div className="text-center mt-2">

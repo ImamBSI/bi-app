@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { formatNumberID } from "@/lib/format";
 
 interface ForecastRow {
   date: string;
@@ -35,13 +36,13 @@ export function CompareTable({ forecastData, actualData }: { forecastData: Forec
                 const actual = actualData.find(a => a.date === date);
                 let gap = "-";
                 if (forecast?.forecastValue != null && actual?.value != null) {
-                  gap = (forecast.forecastValue - actual.value).toFixed(2);
+                  gap = formatNumberID(forecast.forecastValue - actual.value);
                 }
                 return (
                   <TableRow key={i}>
                     <TableCell>{date}</TableCell>
-                    <TableCell>{forecast?.forecastValue?.toFixed(2) ?? "-"}</TableCell>
-                    <TableCell>{actual?.value?.toFixed(2) ?? "-"}</TableCell>
+                    <TableCell>{forecast?.forecastValue != null ? formatNumberID(forecast.forecastValue) : "-"}</TableCell>
+                    <TableCell>{actual?.value != null ? formatNumberID(actual.value) : "-"}</TableCell>
                     <TableCell>{gap}</TableCell>
                   </TableRow>
                 );

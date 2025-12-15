@@ -32,7 +32,7 @@ export function useVariableCorrelation() {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const json = await res.json();
-        console.log("[useVariableCorrelation] Data:", json);
+        // console.log("[useVariableCorrelation] Data:", json);
         setData(json);
       } catch (err) {
         const message = err instanceof Error ? err.message : "Unknown error";

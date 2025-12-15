@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { formatNumberID } from "@/lib/format";
 
 interface ForecastRow {
   date: string;
@@ -29,9 +30,9 @@ export function ForecastTable({ forecastData }: { forecastData: ForecastRow[] })
               forecastData.map((row, i) => (
                 <TableRow key={i}>
                   <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.forecastValue?.toFixed(2) ?? "-"}</TableCell>
-                  <TableCell>{row.upperValue?.toFixed(2) ?? "-"}</TableCell>
-                  <TableCell>{row.lowerValue?.toFixed(2) ?? "-"}</TableCell>
+                  <TableCell>{row.forecastValue != null ? formatNumberID(row.forecastValue) : "-"}</TableCell>
+                  <TableCell>{row.upperValue != null ? formatNumberID(row.upperValue) : "-"}</TableCell>
+                  <TableCell>{row.lowerValue != null ? formatNumberID(row.lowerValue) : "-"}</TableCell>
                 </TableRow>
               ))
             ) : (

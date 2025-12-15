@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFutureInsight } from "@/hooks/insightEngine";
+import { formatNumberID } from "@/lib/format";
 
 export function PeakForecastIndexCard() {
     const { data, loading, error } = useFutureInsight();
@@ -47,7 +48,7 @@ export function PeakForecastIndexCard() {
                         <div key={label}>
                             <p className="text-lg font-medium text-gray-700">{label}</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">
-                                {data.value?.toFixed(2) ?? "-"}
+                                {data.value != null ? formatNumberID(data.value) : "-"}
                             </p>
                             <p className="text-xs text-gray-500 mt-1">{data.month}</p>
                         </div>

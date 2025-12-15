@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatNumberID } from "@/lib/format";
 
 interface Stats {
   min: string | number;
@@ -35,18 +36,18 @@ export function StatsSummary({
             <tbody>
               <tr>
                 <td className="py-1">Min</td>
-                <td>{Number(actualStats.min).toFixed(2)}</td>
-                <td>{Number(forecastStats.min).toFixed(2)}</td>
+                <td>{formatNumberID(Number(actualStats.min))}</td>
+                <td>{formatNumberID(Number(forecastStats.min))}</td>
               </tr>
               <tr>
                 <td className="py-1">Max</td>
-                <td>{Number(actualStats.max).toFixed(2)}</td>
-                <td>{Number(forecastStats.max).toFixed(2)}</td>
+                <td>{formatNumberID(Number(actualStats.max))}</td>
+                <td>{formatNumberID(Number(forecastStats.max))}</td>
               </tr>
               <tr>
                 <td className="py-1">Avg</td>
-                <td>{Number(actualStats.avg).toFixed(2)}</td>
-                <td>{Number(forecastStats.avg).toFixed(2)}</td>
+                <td>{formatNumberID(Number(actualStats.avg))}</td>
+                <td>{formatNumberID(Number(forecastStats.avg))}</td>
               </tr>
             </tbody>
           </table>

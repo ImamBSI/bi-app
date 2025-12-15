@@ -1,3 +1,5 @@
+import { formatNumberID } from "@/lib/format";
+
 interface RegressionData {
   coefficients: Record<string, number>;
   intercept: number;
@@ -13,11 +15,11 @@ export function RegressionInfo({ data }: { data: RegressionData }) {
       <div className="space-y-2 text-sm">
         <p>
           <span className="font-semibold">Intercept:</span>{" "}
-          {data.intercept.toFixed(4)}
+          {formatNumberID(data.intercept, 4)}
         </p>
         <p>
           <span className="font-semibold">R² Score:</span>{" "}
-          {data.r2_score.toFixed(3)}
+          {formatNumberID(data.r2_score, 3)}
         </p>
 
         <div className="mt-2">

@@ -19,9 +19,20 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
 
   if (loading) return <p>Loading comparison...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
-  if (!data) return <p>No data available.</p>;
+  if (!data || data.length === 0) return <p>No data available.</p>;
 
-  const categories = data.map((d) => d.date);
+  // Log data untuk debugging
+  console.log(`[ForecastCompare] Data for ${year}-${category}:`, data);
+  
+  // Filter out rows dimana semua model values adalah null
+  const validData = data.filter(d => d.sarimax !== null || d.prophet !== null || d.linear !== null);
+  
+  if (validData.length === 0) {
+    console.error("[ForecastCompare] No valid data after filtering null values");
+    return <p className="text-red-500">No valid forecast data for {year}</p>;
+  }
+
+  const categories = validData.map((d) => d.date);
 
   const option = {
     title: {
@@ -102,7 +113,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
           },
         },
         itemStyle: { color: "#f59e42" },
-        data: data.map((d) => d.sarimax),
+        data: validData.map((d) => d.sarimax),
         emphasis: { focus: "series" },
       },
       {
@@ -125,7 +136,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
           },
         },
         itemStyle: { color: "#2563eb" },
-        data: data.map((d) => d.prophet),
+        data: validData.map((d) => d.prophet),
         emphasis: { focus: "series" },
       },
       {
@@ -148,7 +159,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
           },
         },
         itemStyle: { color: "#059669" },
-        data: data.map((d) => d.linear),
+        data: validData.map((d) => d.linear),
         emphasis: { focus: "series" },
       },
     ],

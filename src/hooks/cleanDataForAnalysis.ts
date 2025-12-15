@@ -22,7 +22,7 @@ export function useCleanDataForAnalysis() {
         }
         const response = await res.json();
 
-        console.log("[useCleanDataForAnalysis] Response:", response);
+        // console.log("[useCleanDataForAnalysis] Response:", response);
 
         // Handle different response formats
         let parsedData: CleanDataItem[] = [];
