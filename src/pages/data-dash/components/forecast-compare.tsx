@@ -22,7 +22,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
   if (!data || data.length === 0) return <p>No data available.</p>;
 
   // Log data untuk debugging
-  console.log(`[ForecastCompare] Data for ${year}-${category}:`, data);
+  // console.log(`[ForecastCompare] Data for ${year}-${category}:`, data);
   
   // Filter out rows dimana semua model values adalah null
   const validData = data.filter(d => d.sarimax !== null || d.prophet !== null || d.linear !== null);
