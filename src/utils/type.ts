@@ -67,6 +67,7 @@ export interface CapacityPlanning {
   recommended_capacity_natural_gas_mmbtu: number | null;
 
   natural_gas_anomalies: NaturalGasAnomalySummary;
+  electricity_anomalies: ElectricityAnomalySummary;
 }
 
 export interface NaturalGasAnomalySummary {
@@ -83,6 +84,41 @@ export interface NaturalGasAnomalySummary {
   min_threshold: number;
   max_threshold: number;
   recommendation: string;
+  monthly_details: NaturalGasMonthlyDetail[];
+}
+
+export interface NaturalGasMonthlyDetail {
+  month: string;
+  forecast_mmbtu: number;
+  min_threshold: number;
+  max_threshold: number;
+  is_compliant: boolean;
+  is_below_min: boolean;
+  is_above_max: boolean;
+}
+
+export interface ElectricityAnomalySummary {
+  status: "compliant" | "mostly_compliant" | "partially_compliant" | "non_compliant" | "no_data";
+  within_spec: number;
+  out_of_spec: number;
+  total_months: number;
+  compliance_rate: number;
+  avg_forecast: number;
+  max_forecast: number;
+  amio_daily_max: number;
+  rofb_daily_max: number;
+  recommendation: string;
+  monthly_details: ElectricityMonthlyDetail[];
+}
+
+export interface ElectricityMonthlyDetail {
+  month: string;
+  forecast_kwh: number;
+  max_allowed_kwh: number;
+  days_in_month: number;
+  amio_max: number;
+  rofb_max: number;
+  is_compliant: boolean;
 }
 
 /* ------------------------ COST PROJECTION ------------------------ */

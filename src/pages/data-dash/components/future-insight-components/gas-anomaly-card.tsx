@@ -120,6 +120,46 @@ export function NaturalGasAnomalyCard() {
           )}
         </div>
       </div>
+
+      {anomalies.monthly_details && anomalies.monthly_details.length > 0 && (
+        <div className="mt-3 pt-3 border-t border-current border-opacity-20">
+          <p className="text-xs font-semibold text-gray-700 mb-2">Monthly Breakdown</p>
+          <div className="max-h-40 overflow-y-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-1 px-2">Month</th>
+                  <th className="text-right py-1 px-2">Forecast (MMBTU)</th>
+                  <th className="text-right py-1 px-2">Min - Max</th>
+                  <th className="text-center py-1 px-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {anomalies.monthly_details.map((month, idx) => (
+                  <tr key={idx} className="border-b border-gray-100 hover:bg-white/50">
+                    <td className="py-1 px-2">{month.month}</td>
+                    <td className="text-right py-1 px-2 font-semibold">
+                      {formatNumberID(month.forecast_mmbtu)}
+                    </td>
+                    <td className="text-right py-1 px-2 text-xs">
+                      {formatNumberIDNoDecimal(month.min_threshold)} - {formatNumberIDNoDecimal(month.max_threshold)}
+                    </td>
+                    <td className="text-center py-1 px-2">
+                      {month.is_compliant ? (
+                        <span className="text-green-600 font-semibold">✓</span>
+                      ) : month.is_below_min ? (
+                        <span className="text-blue-600 font-semibold">↓</span>
+                      ) : (
+                        <span className="text-red-600 font-semibold">↑</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

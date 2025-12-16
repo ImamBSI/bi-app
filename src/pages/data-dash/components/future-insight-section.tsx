@@ -3,29 +3,42 @@ import ForecastFGChart from "./forecast-fg";
 import { CostProjectionCard } from "./future-insight-components/cost-projection-card";
 import { KPIOutlook } from "./future-insight-components/kpi-outlook-card";
 import { PeakForecastIndexCard } from "./future-insight-components/peak-index-card";
-import { NaturalGasAnomalyCard } from "./future-insight-components/natural-gas-anomaly-card";
+import { NaturalGasAnomalyCard } from "./future-insight-components/gas-anomaly-card";
+import { ElectricAnomalyCard } from "./future-insight-components/electric-anomaly-card";
 
 export function FutureInsightSection() {
   return (
-    <div className="grid grid-cols-2 gap-4 w-full p-4 bg-gray-200 rounded-2xl">
-      {/* ----- LEFT COLUMN ----- */}
-      <div className="flex flex-col gap-4">
-        <ForecastCompareChart year={2026} defaultCategory="indexEnergy" />
-        <ForecastFGChart year={2026} />
+    <div className="flex flex-col gap-2 w-full p-4 bg-gray-200 rounded-2xl">
+      {/* ----- TOP ROW ----- */}
+      <div className="flex gap-2">
+        {/* LEFT COLUMN */}
+        <div className="flex flex-col gap-2 flex-1">
+          <ForecastCompareChart year={2026} defaultCategory="indexEnergy" />
+          <ForecastFGChart year={2026} />
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="flex flex-col gap-2 flex-1">
+          <div className="flex gap-2 max-h-56 ">
+            <div className="flex-shrink-0">
+              <KPIOutlook />
+            </div>
+            <div className="flex-1">
+              <PeakForecastIndexCard />
+            </div>
+          </div>
+          <CostProjectionCard />
+        </div>
       </div>
 
-      {/* ----- RIGHT COLUMN ----- */}
-      <div className="gap-2">
-        <div className="flex gap-4 max-h-56 mb-4">
-          <div className="flex-shrink-0">
-            <KPIOutlook />
-          </div>
-          <div className="flex-1">
-            <PeakForecastIndexCard />
-          </div>
+      {/* ----- BOTTOM ROW: ANOMALY CARDS (SIDE BY SIDE) ----- */}
+      <div className="flex gap-2">
+        <div className="flex-1">
+          <ElectricAnomalyCard />
         </div>
-        <NaturalGasAnomalyCard />
-        <CostProjectionCard />
+        <div className="flex-1">
+          <NaturalGasAnomalyCard />
+        </div>
       </div>
     </div>
   );
