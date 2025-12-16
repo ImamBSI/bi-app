@@ -44,11 +44,11 @@ export function CostProjectionCard() {
 
   return (
     <Card className="p-4 shadow-md gap-0">
-      <CardHeader className="p-0 mb-4">
+      <CardHeader className="p-0 mb-2">
         <CardTitle className="text-lg font-bold text-gray-900">
           Cost Projection
+          <p className="text-sm font-normal text-gray-500">(Annual Estimate)</p>
         </CardTitle>
-        <p className="text-sm font-normal text-gray-500">(Annual Estimate)</p>
       </CardHeader>
       <CardContent className="space-y-4 p-0">
         {/* Total Energy */}

@@ -2,12 +2,13 @@ import { useFutureInsight } from "@/hooks/insightEngine";
 import { formatNumberID, formatNumberIDNoDecimal } from "@/lib/format";
 import { AlertCircle, CheckCircle } from "lucide-react";
 
-export function NaturalGasAnomalyCard() {
+export function GasAnomalyCard() {
   const { data: insight } = useFutureInsight();
 
   if (!insight) return null;
 
   const anomalies = insight.capacity_planning.natural_gas_anomalies;
+  const modelName = insight.capacity_planning.best_natural_gas_model;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -59,7 +60,7 @@ export function NaturalGasAnomalyCard() {
           Natural Gas Compliance
         </h3>
         <p className="text-sm font-normal text-gray-500 mt-1">
-          (Based on Forecast)
+          (Based on {modelName ? modelName.toUpperCase() : "-"} Forecast)
         </p>
       </div>
 
@@ -83,15 +84,19 @@ export function NaturalGasAnomalyCard() {
         <div className="bg-white rounded p-2">
           <p className="text-xs text-gray-600 mb-1">Forecast Range</p>
           <p className="text-xs font-semibold">
-            {formatNumberIDNoDecimal(anomalies.min_forecast)} - {formatNumberIDNoDecimal(anomalies.max_forecast)}
+            {formatNumberIDNoDecimal(anomalies.min_forecast)} -{" "}
+            {formatNumberIDNoDecimal(anomalies.max_forecast)}
           </p>
-          <p className="text-xs text-gray-500">Avg: {formatNumberID(anomalies.avg_forecast)}</p>
+          <p className="text-xs text-gray-500">
+            Avg: {formatNumberID(anomalies.avg_forecast)}
+          </p>
         </div>
 
         <div className="bg-white rounded p-2">
           <p className="text-xs text-gray-600 mb-1">Operational Bounds</p>
           <p className="text-xs font-semibold">
-            {formatNumberIDNoDecimal(anomalies.min_threshold)} - {formatNumberIDNoDecimal(anomalies.max_threshold)}
+            {formatNumberIDNoDecimal(anomalies.min_threshold)} -{" "}
+            {formatNumberIDNoDecimal(anomalies.max_threshold)}
           </p>
           <p className="text-xs text-gray-500">MMBTU</p>
         </div>
@@ -123,7 +128,9 @@ export function NaturalGasAnomalyCard() {
 
       {anomalies.monthly_details && anomalies.monthly_details.length > 0 && (
         <div className="mt-3 pt-3 border-t border-current border-opacity-20">
-          <p className="text-xs font-semibold text-gray-700 mb-2">Monthly Breakdown</p>
+          <p className="text-xs font-semibold text-gray-700 mb-2">
+            Monthly Breakdown
+          </p>
           <div className="max-h-40 overflow-y-auto">
             <table className="w-full text-xs">
               <thead>
@@ -136,13 +143,17 @@ export function NaturalGasAnomalyCard() {
               </thead>
               <tbody>
                 {anomalies.monthly_details.map((month, idx) => (
-                  <tr key={idx} className="border-b border-gray-100 hover:bg-white/50">
+                  <tr
+                    key={idx}
+                    className="border-b border-gray-100 hover:bg-white/50"
+                  >
                     <td className="py-1 px-2">{month.month}</td>
                     <td className="text-right py-1 px-2 font-semibold">
                       {formatNumberID(month.forecast_mmbtu)}
                     </td>
                     <td className="text-right py-1 px-2 text-xs">
-                      {formatNumberIDNoDecimal(month.min_threshold)} - {formatNumberIDNoDecimal(month.max_threshold)}
+                      {formatNumberIDNoDecimal(month.min_threshold)} -{" "}
+                      {formatNumberIDNoDecimal(month.max_threshold)}
                     </td>
                     <td className="text-center py-1 px-2">
                       {month.is_compliant ? (

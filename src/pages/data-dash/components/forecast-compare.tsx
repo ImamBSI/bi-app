@@ -34,6 +34,8 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
 
   const categories = validData.map((d) => d.date);
 
+
+
   const option = {
     title: {
       text: `Forecast Comparison (${year})`,
@@ -67,7 +69,10 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
         color: "#22223b",
         fontWeight: 500,
       },
-      data: ["SARIMAX", "Prophet", "Linear"],
+      data:
+        category === "naturalGas"
+          ? ["SARIMAX", "Prophet", "Linear", "Max Threshold"]
+          : ["SARIMAX", "Prophet", "Linear"],
     },
     xAxis: {
       type: "category",
@@ -162,6 +167,20 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
         data: validData.map((d) => d.linear),
         emphasis: { focus: "series" },
       },
+      // Max bound line for Natural Gas only
+      ...(category === "naturalGas"
+        ? [{
+            name: "Max Threshold",
+            type: "line",
+            smooth: false,
+            symbol: "none",
+            lineStyle: { width: 2, type: "dashed", color: "#dc2626" },
+            data: validData.map(() => 9170),
+            markLine: { show: false },
+            emphasis: { focus: "none" },
+            z: 0,
+          }]
+        : []),
     ],
     grid: {
       left: 40,
@@ -173,7 +192,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
   };
 
   return (
-    <div className="w-full p-4 bg-white rounded-xl shadow-sm flex flex-col justify-center" style={{height: 'min(24rem,40vw)'}}>
+    <div className="w-full p-2 bg-white rounded-xl shadow-sm flex flex-col justify-center" style={{height: 'min(20rem,32vw)'}}>
       <div className="mb-4 flex items-center gap-2">
         <label htmlFor="category-select" className="font-medium text-gray-700">Category:</label>
         <select

@@ -3,7 +3,7 @@ import ForecastFGChart from "./forecast-fg";
 import { CostProjectionCard } from "./future-insight-components/cost-projection-card";
 import { KPIOutlook } from "./future-insight-components/kpi-outlook-card";
 import { PeakForecastIndexCard } from "./future-insight-components/peak-index-card";
-import { NaturalGasAnomalyCard } from "./future-insight-components/gas-anomaly-card";
+import { GasAnomalyCard } from "./future-insight-components/gas-anomaly-card";
 import { ElectricAnomalyCard } from "./future-insight-components/electric-anomaly-card";
 import { CapacityPlanningCard } from "./future-insight-components/capacity-planning-card";
 
@@ -16,11 +16,12 @@ export function FutureInsightSection() {
         <div className="flex flex-col gap-2 flex-1">
           <ForecastCompareChart year={2026} defaultCategory="indexEnergy" />
           <ForecastFGChart year={2026} />
+          <CostProjectionCard />
         </div>
 
         {/* RIGHT COLUMN */}
         <div className="flex flex-col gap-2 flex-1">
-          <div className="flex gap-2 max-h-56 ">
+          <div className="flex gap-2 max-h-60">
             <div className="flex-shrink-0">
               <KPIOutlook />
             </div>
@@ -28,24 +29,20 @@ export function FutureInsightSection() {
               <PeakForecastIndexCard />
             </div>
           </div>
-          <CostProjectionCard />
           <CapacityPlanningCard />
+          {/* <CostProjectionCard /> */}
         </div>
       </div>
+      {/* <CapacityCompliancePanelV2 /> */}
 
       {/* ----- BOTTOM ROW: ANOMALY CARDS (SIDE BY SIDE) ----- */}
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <div className="flex-1">
           <ElectricAnomalyCard />
         </div>
         <div className="flex-1">
-          <NaturalGasAnomalyCard />
+          <GasAnomalyCard />
         </div>
-      </div>
-
-      {/* ----- CAPACITY PLANNING CARD ----- */}
-      <div className="w-full">
-        
       </div>
     </div>
   );

@@ -50,7 +50,6 @@ export interface CapacityPlanning {
   best_natural_gas_model: string; 
   required_electricity_kwh: number;
   required_natural_gas_mmbtu: number;
-  required_index_energy_gj: number;
 
   peak_load: {
     electricity: {

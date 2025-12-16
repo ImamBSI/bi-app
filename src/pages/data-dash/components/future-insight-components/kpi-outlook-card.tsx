@@ -21,7 +21,7 @@ export function KPIOutlook() {
   const kpi = data.kpi_outlook;
 
   return (
-    <Card className="p-2 shadow-md max-h-60 max-w-60 gap-0">
+    <Card className="p-4 shadow-md max-h-60 max-w-60 gap-0">
       <CardHeader className="p-0 gap-0">
         <CardTitle className="text-base font-bold text-gray-800">
           KPI Index Energy Outlook

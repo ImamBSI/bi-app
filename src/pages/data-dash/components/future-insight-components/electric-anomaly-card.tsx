@@ -8,6 +8,7 @@ export function ElectricAnomalyCard() {
   if (!insight) return null;
 
   const anomalies = insight.capacity_planning.electricity_anomalies;
+  const modelName = insight.capacity_planning.best_electricity_model;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -59,7 +60,7 @@ export function ElectricAnomalyCard() {
           Electricity Capacity Compliance
         </h3>
         <p className="text-sm font-normal text-gray-500 mt-1">
-          (Based on Forecast)
+          (Based on {modelName ? modelName.toUpperCase() : "-"} Forecast)
         </p>
       </div>
 
@@ -83,14 +84,17 @@ export function ElectricAnomalyCard() {
           <p className="text-xs font-semibold">
             {formatNumberIDNoDecimal(anomalies.max_forecast)}
           </p>
-          <p className="text-xs text-gray-500">Avg: {formatNumberID(anomalies.avg_forecast)} kWh</p>
+          <p className="text-xs text-gray-500">
+            Avg: {formatNumberID(anomalies.avg_forecast)} kWh
+          </p>
         </div>
 
         <div className="bg-white rounded p-2">
           <p className="text-xs text-gray-600 mb-1">Capacity Sources</p>
           <p className="text-xs font-semibold">AMIO + ROFB</p>
           <p className="text-xs text-gray-500">
-            {formatNumberIDNoDecimal(anomalies.amio_daily_max)}k + {formatNumberIDNoDecimal(anomalies.rofb_daily_max)}k/day
+            {formatNumberIDNoDecimal(anomalies.amio_daily_max)}k +{" "}
+            {formatNumberIDNoDecimal(anomalies.rofb_daily_max)}k/day
           </p>
         </div>
       </div>
@@ -121,7 +125,9 @@ export function ElectricAnomalyCard() {
 
       {anomalies.monthly_details && anomalies.monthly_details.length > 0 && (
         <div className="mt-3 pt-3 border-t border-current border-opacity-20">
-          <p className="text-xs font-semibold text-gray-700 mb-2">Monthly Breakdown</p>
+          <p className="text-xs font-semibold text-gray-700 mb-2">
+            Monthly Breakdown
+          </p>
           <div className="max-h-40 overflow-y-auto">
             <table className="w-full text-xs">
               <thead>
@@ -134,7 +140,10 @@ export function ElectricAnomalyCard() {
               </thead>
               <tbody>
                 {anomalies.monthly_details.map((month, idx) => (
-                  <tr key={idx} className="border-b border-gray-100 hover:bg-white/50">
+                  <tr
+                    key={idx}
+                    className="border-b border-gray-100 hover:bg-white/50"
+                  >
                     <td className="py-1 px-2">{month.month}</td>
                     <td className="text-right py-1 px-2 font-semibold">
                       {formatNumberIDNoDecimal(month.forecast_kwh)}
