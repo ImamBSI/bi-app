@@ -52,7 +52,7 @@ export function CostProjectionCard() {
       </CardHeader>
       <CardContent className="space-y-4 p-0">
         {/* Total Energy */}
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
             <p className="text-gray-600">Total Electricity</p>
             <p className="text-lg font-bold">
@@ -68,7 +68,7 @@ export function CostProjectionCard() {
         </div>
 
         {/* Average Prices */}
-        <div className="grid grid-cols-2 gap-4 text-sm border-t pt-3">
+        <div className="grid grid-cols-2 gap-4 text-sm border-t">
           <div>
             <p className="text-gray-600">Avg Price (Electricity)</p>
             <p className="font-semibold">
@@ -84,7 +84,7 @@ export function CostProjectionCard() {
         </div>
 
         {/* Cost Breakdown */}
-        <div className="space-y-2 text-sm border-t pt-3">
+        <div className="space-y-2 text-sm border-t">
           <div className="flex justify-between">
             <span className="text-gray-600">Electricity Cost:</span>
             <span className="font-bold">
