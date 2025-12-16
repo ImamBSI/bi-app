@@ -71,7 +71,7 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
       },
       data:
         category === "naturalGas"
-          ? ["SARIMAX", "Prophet", "Linear", "Max Threshold"]
+          ? ["SARIMAX", "Prophet", "Linear", "Max Threshold", "Min Threshold"]
           : ["SARIMAX", "Prophet", "Linear"],
     },
     xAxis: {
@@ -167,19 +167,32 @@ export default function ForecastCompareChart({ year, defaultCategory = "indexEne
         data: validData.map((d) => d.linear),
         emphasis: { focus: "series" },
       },
-      // Max bound line for Natural Gas only
+      // Max & Min bound line for Natural Gas only
       ...(category === "naturalGas"
-        ? [{
-            name: "Max Threshold",
-            type: "line",
-            smooth: false,
-            symbol: "none",
-            lineStyle: { width: 2, type: "dashed", color: "#dc2626" },
-            data: validData.map(() => 9170),
-            markLine: { show: false },
-            emphasis: { focus: "none" },
-            z: 0,
-          }]
+        ? [
+            {
+              name: "Max Threshold",
+              type: "line",
+              smooth: false,
+              symbol: "none",
+              lineStyle: { width: 2, type: "dashed", color: "#dc2626" },
+              data: validData.map(() => 9170),
+              markLine: { show: false },
+              emphasis: { focus: "none" },
+              z: 0,
+            },
+            {
+              name: "Min Threshold",
+              type: "line",
+              smooth: false,
+              symbol: "none",
+              lineStyle: { width: 2, type: "dashed", color: "#dc2626" },
+              data: validData.map(() => 7054),
+              markLine: { show: false },
+              emphasis: { focus: "none" },
+              z: 0,
+            },
+          ]
         : []),
     ],
     grid: {
