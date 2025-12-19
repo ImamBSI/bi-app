@@ -1,43 +1,23 @@
-import { useEffect, useState } from "react";
+import { useVariableCorrelation } from "@/hooks/variableCorrelation";
 import ReactECharts from "echarts-for-react";
 
-interface VifItem {
-  feature: string;
-  VIF: number;
-}
-
 export function VifInfo() {
-  const [vifData, setVifData] = useState<VifItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchVif = async () => {
-      try {
-        const res = await fetch(
-          "http://localhost:5000/bi-apps/api/var_correlation"
-        );
-        const data = await res.json();
-        if (data?.vif) {
-          setVifData(data.vif);
-        }
-      } catch (err) {
-        console.error("Error fetching VIF:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVif();
-  }, []);
+  const { data, loading, error } = useVariableCorrelation();
 
   if (loading) {
     return <div className="text-sm text-gray-600">Loading VIF data...</div>;
   }
 
+  if (error) {
+    return <div className="text-sm text-red-600">Error: {error}</div>;
+  }
+
+  const vifData = data?.vif || [];
+
   if (!vifData.length) {
     return <div className="text-sm text-gray-600">No VIF data available</div>;
   }
 
-  // Buat bar chart horizontal
   const option = {
     title: {
       text: "Variance Inflation Factor (VIF)",
@@ -57,14 +37,14 @@ export function VifInfo() {
     },
     yAxis: {
       type: "category",
-      data: vifData.map((d) => d.feature),
+      data: vifData.map((d: any) => d.feature),
     },
     series: [
       {
         type: "bar",
-        data: vifData.map((d) => d.VIF),
+        data: vifData.map((d: any) => d.VIF),
         itemStyle: {
-          color: (params: any) => (params.value > 10 ? "#ef4444" : "#3b82f6"), // merah jika multikolinearitas tinggi
+          color: (params: any) => (params.value > 10 ? "#ef4444" : "#3b82f6"),
         },
         label: {
           show: true,

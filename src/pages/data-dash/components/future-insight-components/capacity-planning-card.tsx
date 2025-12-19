@@ -15,9 +15,6 @@ export function CapacityPlanningCard() {
       <div className="flex items-center gap-2 mb-4">
         <TrendingUp className="w-5 h-5 text-blue-600" />
         <h3 className="font-bold text-lg text-gray-900">Capacity Planning</h3>
-        <span className="text-xs font-medium text-gray-500 ml-auto">
-          Year {insight.summary.year}
-        </span>
       </div>
 
       {/* ELECTRICITY CAPACITY */}
