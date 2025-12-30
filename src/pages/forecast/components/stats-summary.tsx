@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 interface Stats {
   min: string | number;

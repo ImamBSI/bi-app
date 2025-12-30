@@ -1,5 +1,5 @@
 import { useFutureInsight } from "@/hooks/insightEngine";
-import { formatNumberID, formatNumberIDNoDecimal } from "@/lib/format";
+import { formatNumberID, formatNumberIDNoDecimal } from "@/library/format";
 import { AlertCircle, CheckCircle } from "lucide-react";
 
 export function ElectricAnomalyCard() {

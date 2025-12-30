@@ -16,6 +16,8 @@ interface UseForecastFGOptions {
   year?: number;
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useForecastFG(options: UseForecastFGOptions = {}) {
   const [data, setData] = useState<ForecastFGItem[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,9 +28,7 @@ export function useForecastFG(options: UseForecastFGOptions = {}) {
     setError(null);
     const params = new URLSearchParams();
     if (options.year) params.append("year", String(options.year));
-    const url = params.toString()
-      ? `/bi-apps/api/forecast_fg?${params.toString()}`
-      : `/bi-apps/api/forecast_fg`;
+    const url = `${API_BASE}/bi-apps/api/forecast_fg?${params.toString()}`;
     fetch(url)
       .then(async (res) => {
         if (!res.ok) throw new Error("Failed to fetch forecast FG");

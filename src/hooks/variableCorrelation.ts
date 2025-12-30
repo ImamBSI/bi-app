@@ -17,6 +17,8 @@ export interface CorrelationData {
   vif: any;
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useVariableCorrelation() {
   const [data, setData] = useState<CorrelationData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ export function useVariableCorrelation() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://127.0.0.1:5000/bi-apps/api/var_correlation");
+        const res = await fetch(`${API_BASE}/bi-apps/api/var_correlation`);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }

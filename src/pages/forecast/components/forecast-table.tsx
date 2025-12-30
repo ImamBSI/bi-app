@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 interface ForecastRow {
   date: string;

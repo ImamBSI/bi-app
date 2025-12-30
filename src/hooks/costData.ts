@@ -19,6 +19,8 @@ export interface CostDataResponse {
   naturalGas: NaturalGasBilling[];
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useCostData(year: number) {
   const [data, setData] = useState<CostDataResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,7 +32,7 @@ export function useCostData(year: number) {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/bi-apps/api/billing?year=${year}`, {
+        const res = await fetch(`${API_BASE}/bi-apps/api/billing?year=${year}`, {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error("Failed to fetch cost data");

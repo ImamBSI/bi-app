@@ -1,4 +1,4 @@
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 interface RegressionData {
   coefficients: Record<string, number>;

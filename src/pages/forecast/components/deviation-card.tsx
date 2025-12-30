@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 interface DeviationsCardProps {
   forecastData: { date: string; forecastValue: number | null }[];

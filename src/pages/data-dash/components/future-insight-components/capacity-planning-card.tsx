@@ -1,5 +1,5 @@
 import { useFutureInsight } from "@/hooks/insightEngine";
-import { formatNumberIDNoDecimal } from "@/lib/format";
+import { formatNumberIDNoDecimal } from "@/library/format";
 import { TrendingUp, Zap, Flame } from "lucide-react";
 
 export function CapacityPlanningCard() {

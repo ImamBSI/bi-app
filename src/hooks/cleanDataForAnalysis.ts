@@ -6,6 +6,8 @@ export interface CleanDataItem {
   values: Record<string, number>;
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useCleanDataForAnalysis() {
   const [data, setData] = useState<CleanDataItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -16,7 +18,7 @@ export function useCleanDataForAnalysis() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://localhost:5000/bi-apps/api/clean_data");
+        const res = await fetch(`${API_BASE}/bi-apps/api/clean_data`);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }

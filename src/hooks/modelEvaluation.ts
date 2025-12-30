@@ -6,6 +6,8 @@ export interface Evaluation {
   mape: number;
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useEvaluation(model: string, category: string) {
   const [evaluation, setEvaluation] = useState<Evaluation | null>(null);
 
@@ -13,7 +15,7 @@ export function useEvaluation(model: string, category: string) {
     const fetchEvaluation = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:5000/bi-apps/api/evaluation?model=${model}&category=${category}`
+          `${API_BASE}/bi-apps/api/evaluation?model=${model}&category=${category}`
         );
         const data = await res.json();
 

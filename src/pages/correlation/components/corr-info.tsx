@@ -1,6 +1,6 @@
 import { HeatmapChart } from "@/components/heatmap";
 import { RegressionPlot } from "@/pages/correlation/components/regression-plot";
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 interface Props {
   title: string;

@@ -1,13 +1,15 @@
 import type { FutureInsight } from "@/utils/type";
 import { useEffect, useState } from "react";
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useFutureInsight() {
   const [data, setData] = useState<FutureInsight | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/bi-apps/api/future_insight")
+    fetch(`${API_BASE}/bi-apps/api/future_insight`)
       .then(async (res) => {
         if (!res.ok) throw new Error("Failed to fetch future insight");
         const json: FutureInsight = await res.json();

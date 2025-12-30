@@ -12,8 +12,10 @@ export function useActualData(category: string, year: string) {
   useEffect(() => {
     const fetchRawData = async () => {
       try {
+        // Use environment variable for API base URL
+        const API_BASE = import.meta.env.BI_APPS_API || "";
         // Fetch all data tanpa filter untuk extract available years
-        const resAll = await fetch(`http://127.0.0.1:5000/bi-apps/api/clean_data`);
+        const resAll = await fetch(`${API_BASE}/bi-apps/api/clean_data`);
         const dataAll = await resAll.json();
 
         // console.log("[actualData] Fetched all data:", dataAll);
@@ -33,7 +35,7 @@ export function useActualData(category: string, year: string) {
         // console.log("[actualData] Available years:", allYears); 
         setAvailableYears(allYears);
 
-        let url = `http://127.0.0.1:5000/bi-apps/api/clean_data`;
+        let url = `${API_BASE}/bi-apps/api/clean_data`;
         const params = new URLSearchParams();
         if (category) params.append("category", category);
         if (year) params.append("year", year);

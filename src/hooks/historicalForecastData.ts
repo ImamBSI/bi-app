@@ -7,6 +7,8 @@ export interface ForecastRow {
   lowerValue: number | null;
 }
 
+const API_BASE = import.meta.env.BI_APPS_API || "";
+
 export function useHistoricalForecast(model: string, category: string) {
   const [forecastData, setForecastData] = useState<ForecastRow[]>([]);
   const [warning, setWarning] = useState("");
@@ -15,7 +17,7 @@ export function useHistoricalForecast(model: string, category: string) {
     const fetchForecast = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:5000/bi-apps/api/historical_forecast?model=${model}&category=${category}`
+          `${API_BASE}/bi-apps/api/historical_forecast?model=${model}&category=${category}`
         );
         const data = await res.json();
 

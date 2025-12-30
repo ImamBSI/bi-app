@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFutureInsight } from "@/hooks/insightEngine";
-import { formatNumberID } from "@/lib/format";
+import { formatNumberID } from "@/library/format";
 
 export function PeakForecastIndexCard() {
   const { data, loading, error } = useFutureInsight();
