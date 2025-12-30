@@ -1,0 +1,37 @@
+contoh hasil Raw Data
+[
+  {
+    "month": "01",
+    "values": {
+      "dieselValue": 999999999999,
+      "electricity": 99999999,
+      "finishGood": 9999999999,
+      "indexEnergy": 99999999,
+      "naturalGas": 999999999,
+      "originalDiesel": 999,
+      "originalElectric": 9999999,
+      "originalNaturalGas": 999999,
+      "productKl": 99999999999
+    },
+    "year": "2022"
+  },
+  ..data lainya
+]
+
+
+contoh hasil Clean data
+{
+  "data": [
+    {
+      "month": "01",
+      "values": {
+        "electricity": 09999999999,
+        "indexEnergy": 9999,
+        "naturalGas": 9999999,
+        "productKl": 999999
+      },
+      "year": "2022"
+    },
+    ...data lainya
+    ]
+}
