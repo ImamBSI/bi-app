@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/layout";
 import "./index.css";
 import { ForecastPage } from "@/pages/forecast";
-import { DataDash } from "@/pages/data-dash";
 import { CorrelationPage } from "@/pages/correlation";
+import { ExploratoryDataAnalysis } from "./pages/eda";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,8 +17,8 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/correlation" element={<Layout title="Correlation Page" />}>
           <Route index element={<CorrelationPage />} />
         </Route>
-        <Route path="/data-dash" element={<Layout title="Summary Page" />}>
-          <Route index element={<DataDash />} />
+        <Route path="/eda" element={<Layout title="Summary Page" />}>
+          <Route index element={<ExploratoryDataAnalysis />} />
         </Route>
       </Routes>
     </BrowserRouter>
