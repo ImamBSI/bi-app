@@ -10,16 +10,16 @@ export function CapacityPlanningCard() {
   const capacity = insight.capacity_planning;
 
   return (
-    <div className="border rounded-lg p-4 bg-white border-gray-200 space-y-4">
+    <div className="border rounded-lg p-4 h-full shadow-md bg-white border-gray-200 space-y-4">
       {/* HEADER */}
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-2">
         <TrendingUp className="w-5 h-5 text-blue-600" />
         <h3 className="font-bold text-lg text-gray-900">Capacity Planning</h3>
       </div>
 
       {/* ELECTRICITY CAPACITY */}
       <div className="border rounded-lg p-4 bg-gradient-to-br from-yellow-50 to-orange-50 border-orange-200">
-        <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2">
             <Zap className="w-5 h-5 text-orange-600" />
             <div>
@@ -94,7 +94,7 @@ export function CapacityPlanningCard() {
 
       {/* NATURAL GAS CAPACITY */}
       <div className="border rounded-lg p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
-        <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2">
             <Flame className="w-5 h-5 text-blue-600" />
             <div>
@@ -108,7 +108,7 @@ export function CapacityPlanningCard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 mb-3">
+        <div className="grid grid-cols-3 gap-3 mb-2">
           {/* Total Required */}
           <div className="bg-white rounded p-3 border border-blue-100">
             <p className="text-xs text-gray-600 mb-1">Total Required</p>
@@ -167,24 +167,8 @@ export function CapacityPlanningCard() {
         )}
       </div>
 
-      {/* TOTAL INDEX ENERGY */}
-      {/* <div className="border rounded-lg p-4 bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-purple-600" />
-            <p className="font-semibold text-gray-900">Total Energy (GJ)</p>
-          </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold text-purple-700">
-              {formatNumberID(capacity.required_index_energy_gj)}
-            </p>
-            <p className="text-xs text-gray-600">for year {insight.summary.year}</p>
-          </div>
-        </div>
-      </div> */}
-
       {/* SUMMARY TABLE */}
-      <div className="border-t pt-4">
+      <div className="border-t pt-2">
         <p className="text-xs font-semibold text-gray-700 mb-3">
           Capacity Summary
         </p>
@@ -215,19 +199,13 @@ export function CapacityPlanningCard() {
               </td>
               <td className="text-right py-2 px-2">
                 {capacity.peak_load.electricity.value_kwh
-                  ? formatNumberIDNoDecimal(
-                      capacity.peak_load.electricity.value_kwh
-                    )
-                  : "N/A"}{" "}
-                kWh
+                  ? `${formatNumberIDNoDecimal(capacity.peak_load.electricity.value_kwh)} kWh`
+                  : "N/A"}
               </td>
               <td className="text-right py-2 px-2 font-semibold text-orange-700">
                 {capacity.recommended_capacity_electricity_kwh
-                  ? formatNumberIDNoDecimal(
-                      capacity.recommended_capacity_electricity_kwh
-                    )
-                  : "N/A"}{" "}
-                kWh
+                  ? `${formatNumberIDNoDecimal(capacity.recommended_capacity_electricity_kwh)} kWh`
+                  : "N/A"}
               </td>
             </tr>
             <tr className="border-b border-gray-100 hover:bg-blue-50">
@@ -240,19 +218,13 @@ export function CapacityPlanningCard() {
               </td>
               <td className="text-right py-2 px-2">
                 {capacity.peak_load.natural_gas.value_mmbtu
-                  ? formatNumberIDNoDecimal(
-                      capacity.peak_load.natural_gas.value_mmbtu
-                    )
-                  : "N/A"}{" "}
-                MMBTU
+                  ? `${formatNumberIDNoDecimal(capacity.peak_load.natural_gas.value_mmbtu)} MMBTU`
+                  : "N/A"}
               </td>
               <td className="text-right py-2 px-2 font-semibold text-blue-700">
                 {capacity.recommended_capacity_natural_gas_mmbtu
-                  ? formatNumberIDNoDecimal(
-                      capacity.recommended_capacity_natural_gas_mmbtu
-                    )
-                  : "N/A"}{" "}
-                MMBTU
+                  ? `${formatNumberIDNoDecimal(capacity.recommended_capacity_natural_gas_mmbtu)} MMBTU`
+                  : "N/A"}
               </td>
             </tr>
           </tbody>

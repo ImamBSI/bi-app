@@ -52,6 +52,13 @@ export function EnergyTrends({ selectedYear, data }: EnergyTrendsProps) {
             color="#059669"
           />
         </div>
+        <div className="border rounded-lg bg-gray-50 p-2 h-52">
+          <LineTrendChart
+            title="Finish Good Product (KL)"
+            data={extractCategory("productKl")}
+            color="#eb34e5"
+          />
+        </div>
       </div>
     </div>
   );
