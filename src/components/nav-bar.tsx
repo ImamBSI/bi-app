@@ -6,7 +6,7 @@ const Navbar = () => {
   const navItems = [
     { label: "Forecast", path: "/" },
     { label: "Correlation Analisys", path: "/correlation" },
-    { label: "EDA", path: "/data-dash" },
+    { label: "EDA", path: "/eda" },
   ];
 
   return (
